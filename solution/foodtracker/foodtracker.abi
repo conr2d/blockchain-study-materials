@@ -1,0 +1,189 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Thu Oct 25 04:09:00 2018",
+    "version": "eosio::abi/1.0",
+    "structs": [
+        {
+            "name": "addfood",
+            "base": "",
+            "fields": [
+                {
+                    "name": "member",
+                    "type": "name"
+                },
+                {
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "name": "cal",
+                    "type": "uint16"
+                }
+            ]
+        },
+        {
+            "name": "createmember",
+            "base": "",
+            "fields": [
+                {
+                    "name": "member",
+                    "type": "name"
+                },
+                {
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "name": "height",
+                    "type": "uint8"
+                },
+                {
+                    "name": "weight",
+                    "type": "uint8"
+                }
+            ]
+        },
+        {
+            "name": "deletemember",
+            "base": "",
+            "fields": [
+                {
+                    "name": "member",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "food",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "time",
+                    "type": "time_t"
+                },
+                {
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "name": "cal",
+                    "type": "uint16"
+                }
+            ]
+        },
+        {
+            "name": "member",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "name"
+                },
+                {
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "name": "height",
+                    "type": "uint8"
+                },
+                {
+                    "name": "weight",
+                    "type": "uint8"
+                }
+            ]
+        },
+        {
+            "name": "readmember",
+            "base": "",
+            "fields": [
+                {
+                    "name": "member",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "updatemember",
+            "base": "",
+            "fields": [
+                {
+                    "name": "member",
+                    "type": "name"
+                },
+                {
+                    "name": "height",
+                    "type": "uint8"
+                },
+                {
+                    "name": "weight",
+                    "type": "uint8"
+                }
+            ]
+        }
+    ],
+    "types": [
+        {
+            "new_type_name": "time_t",
+            "type": "int32"
+        }
+    ],
+    "actions": [
+        {
+            "name": "addfood",
+            "type": "addfood",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "createmember",
+            "type": "createmember",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "deletemember",
+            "type": "deletemember",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "food",
+            "type": "food",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "member",
+            "type": "member",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "readmember",
+            "type": "readmember",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "updatemember",
+            "type": "updatemember",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "foods",
+            "type": "food",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "members",
+            "type": "member",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "abi_extensions": []
+}

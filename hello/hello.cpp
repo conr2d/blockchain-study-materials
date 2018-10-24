@@ -5,7 +5,7 @@
 using namespace ...;
 
 // declare class inheriting from eosio::contract
-class ... : public ... {
+CONTRACT ... : public ... {
 public:
    // declare using constructor of `contract` or declare your own constructor
 
@@ -13,10 +13,9 @@ public:
    // 1. hi prints user account name (account name will be passed by 1st parameter)
    // 2. hi checks action is executed with permission of given user account
 
-   /// @abi action
-   void ...(...) {
+   ACTION ...(...) {
       ...
    }
 };
 
-EOSIO_ABI(..., ...)
+EOSIO_DISPATCH(..., ...)

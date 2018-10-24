@@ -2,26 +2,26 @@
 
 using namespace eosio;
 
-class foodtracker : public contract {
+CONTRACT foodtracker : public contract {
 public:
    using contract::contract;
 
-   /// @abi table members i64
-   struct member {
-      account_name id;
+   TABLE [[eosio::action]]
+   member {
+      name         id;
       std::string  _name;
       uint8_t      height;
       uint8_t      weight;
 
-      uint64_t primary_key()const { return id; }
+      uint64_t primary_key()const { return id.value; }
 
       EOSLIB_SERIALIZE(member, (id)(_name)(height)(weight))
    };
 
-   typedef eosio::multi_index<N(members), member> members;
+   typedef eosio::multi_index<"members"_n, member> members;
 
-   /// @abi table foods i64
-   struct food {
+   TABLE [[eosio::action]]
+   food {
       uint64_t id;
       time_t   time;
       std::string _name;
@@ -32,12 +32,12 @@ public:
       EOSLIB_SERIALIZE(food, (id)(time)(_name)(cal))
    };
 
-   typedef eosio::multi_index<N(foods), food> foods;
+   typedef eosio::multi_index<"foods"_n, food> foods;
 
-   void createmember(account_name member, std::string _name, uint8_t height, uint8_t weight) {
+   ACTION createmember(name member, std::string _name, uint8_t height, uint8_t weight) {
       require_auth(_self);
 
-      members mbs(_self, _self);
+      members mbs(_self, _self.value);
       mbs.emplace(_self, [&](auto& m) {
          m.id = member;
          m._name = _name;
@@ -46,34 +46,34 @@ public:
       });
    }
 
-   void readmember(account_name member) {
-      members mbs(_self, _self);
-      auto itr = mbs.find(member);
+   ACTION readmember(name member) {
+      members mbs(_self, _self.value);
+      auto itr = mbs.find(member.value);
 
       if (itr == mbs.end()) {
          print(name{member}, " not found");
       } else {
          auto m = *itr;
-         print(name{m.id}, ", ", m._name, ", ", (uint64_t)m.height, ", ", (uint64_t)m.weight);
+         print(m.id, ", ", m._name, ", ", (uint64_t)m.height, ", ", (uint64_t)m.weight);
       }
    }
 
-   void updatemember(account_name member, uint8_t height, uint8_t weight) {
+   ACTION updatemember(name member, uint8_t height, uint8_t weight) {
       require_auth(member);
 
-      members mbs(_self, _self);
-      auto itr = mbs.find(member);
+      members mbs(_self, _self.value);
+      const auto itr = mbs.find(member.value);
 
-      mbs.modify(itr, 0, [&](auto& m) {
+      mbs.modify(itr, name(0), [&](auto& m) {
          if (height > 0) m.height = height;
          if (weight > 0) m.weight = weight;
       });
    }
 
-   void deletemember(account_name member) {
+   ACTION deletemember(name member) {
       require_auth(member);
 
-      foods fds(_self, member);
+      foods fds(_self, member.value);
 
       auto itr = fds.begin();
       while (itr != fds.end()) {
@@ -81,21 +81,21 @@ public:
          itr = fds.begin();
       }
 
-      members mbs(_self, _self);
-      auto m = mbs.find(member);
+      members mbs(_self, _self.value);
+      auto m = mbs.find(member.value);
       mbs.erase(m);
    }
 
-   void addfood(account_name member, std::string _name, uint16_t cal) {
+   ACTION addfood(name member, std::string _name, uint16_t cal) {
       require_auth(member);
 
-      members mbs(_self, _self);
-      auto itr = mbs.find(member);
+      members mbs(_self, _self.value);
+      auto itr = mbs.find(member.value);
 
       if (itr == mbs.end()) {
          print(name{member}, " not found");
       } else {
-         foods fds(_self, member);
+         foods fds(_self, member.value);
 
          fds.emplace(member, [&](auto& f) {
             f.id = fds.available_primary_key();
@@ -107,4 +107,4 @@ public:
    }
 };
 
-EOSIO_ABI(foodtracker, (createmember)(readmember)(updatemember)(deletemember)(addfood))
+EOSIO_DISPATCH(foodtracker, (createmember)(readmember)(updatemember)(deletemember)(addfood))
