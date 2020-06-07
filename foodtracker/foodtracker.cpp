@@ -58,5 +58,3 @@ public:
       foods fds(_self, member.value);
    }
 };
-
-EOSIO_DISPATCH(..., ...)

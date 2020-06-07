@@ -1,6 +1,7 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Thu Oct 25 04:09:00 2018",
-    "version": "eosio::abi/1.0",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
     "structs": [
         {
             "name": "addfood",
@@ -11,7 +12,7 @@
                     "type": "name"
                 },
                 {
-                    "name": "_name",
+                    "name": "name",
                     "type": "string"
                 },
                 {
@@ -29,7 +30,7 @@
                     "type": "name"
                 },
                 {
-                    "name": "_name",
+                    "name": "name",
                     "type": "string"
                 },
                 {
@@ -62,10 +63,10 @@
                 },
                 {
                     "name": "time",
-                    "type": "time_t"
+                    "type": "time_point_sec"
                 },
                 {
-                    "name": "_name",
+                    "name": "name",
                     "type": "string"
                 },
                 {
@@ -83,7 +84,7 @@
                     "type": "name"
                 },
                 {
-                    "name": "_name",
+                    "name": "name",
                     "type": "string"
                 },
                 {
@@ -125,12 +126,6 @@
             ]
         }
     ],
-    "types": [
-        {
-            "new_type_name": "time_t",
-            "type": "int32"
-        }
-    ],
     "actions": [
         {
             "name": "addfood",
@@ -145,16 +140,6 @@
         {
             "name": "deletemember",
             "type": "deletemember",
-            "ricardian_contract": ""
-        },
-        {
-            "name": "food",
-            "type": "food",
-            "ricardian_contract": ""
-        },
-        {
-            "name": "member",
-            "type": "member",
             "ricardian_contract": ""
         },
         {
@@ -185,5 +170,5 @@
         }
     ],
     "ricardian_clauses": [],
-    "abi_extensions": []
+    "variants": []
 }

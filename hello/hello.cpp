@@ -17,5 +17,3 @@ public:
       ...
    }
 };
-
-EOSIO_DISPATCH(..., ...)
