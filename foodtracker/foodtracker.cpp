@@ -9,8 +9,6 @@ CONTRACT ... : public ... {
 public:
    // declare using constructor of `contract` or declare your own constructor
 
-   // add [[eosio::action]] attribute to table
-
    // declare struct to store members' info
    // struct `member` stores account name, real name, height, weight
    // eg. eosio, Jeeyong Um, 185, 74
@@ -26,8 +24,6 @@ public:
    };
 
    typedef eosio::multi_index<"members"_n, member> members;
-
-   // add [[eosio::action]] attribute to table
 
    // declare struct to store each members' eating
    // struct `food` stores id(auto-incremental), time, food name, calories
