@@ -339,6 +339,7 @@ sudo apt install build-essential cmake
 git clone https://github.com/conr2d/eosio.contracts -b disable-protocol-feature
 cd eosio.contracts
 mkdir build
+cd build
 cmake ..
 make -j$(nproc)
 ```
