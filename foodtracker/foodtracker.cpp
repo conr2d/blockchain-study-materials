@@ -18,9 +18,6 @@ public:
 
       // `primary_key()` is always necessary to use struct with multi_index table.
       uint64_t primary_key()const { return ...; }
-
-      // add EOSLIB_SERIALIZE() macro
-      ...
    };
 
    typedef eosio::multi_index<"members"_n, member> members;
@@ -33,9 +30,6 @@ public:
       ...
 
       uint64_t primary_key()const { return ...; }
-
-      // add EOSLIB_SERIALIZE() macro
-      ...
    };
 
    typedef eosio::multi_index<"foods"_n, food> foods;
