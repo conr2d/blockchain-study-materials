@@ -335,7 +335,7 @@ sudo apt install ./eosio.cdt_1.7.0-1-ubuntu-18.04_amd64.deb
 컨트랙트를 다운로드하고 컴파일 한다.
 
 ```
-sudo apt install build-essential cmake -y
+sudo apt update && sudo apt install build-essential cmake -y
 git clone https://github.com/conr2d/eosio.contracts -b disable-protocol-feature
 cd eosio.contracts
 mkdir build
