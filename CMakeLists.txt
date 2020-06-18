@@ -1,18 +1,16 @@
 cmake_minimum_required(VERSION 3.5)
 
-include(ExternalProject)
+#get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+#string(REPLACE " " "_" PROJECT ${PROJECT})
+#project(${PROJECT})
 
-find_package(eosio.cdt)
+project(multi)
 
-ExternalProject_Add(
-   contracts_project
-   SOURCE_DIR ${CMAKE_SOURCE_DIR}/contracts
-   BINARY_DIR ${CMAKE_BINARY_DIR}/contracts
-   CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${EOSIO_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake
-   UPDATE_COMMAND ""
-   PATCH_COMMAND ""
-   TEST_COMMAND ""
-   INSTALL_COMMAND ""
-   BUILD_ALWAYS 1
-)
+set(EOSIO_WASM_OLD_BEHAVIOR "Off")
+find_package("eosio.cdt")
 
+include(${EOSIO_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME})
+
+add_contract(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME} src/${CMAKE_PROJECT_NAME}.cpp)
+target_include_directories(multi PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
