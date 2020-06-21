@@ -135,7 +135,7 @@ nodeos --http-server-address=0.0.0.0:8888 --http-validate-host=false
 위와 같이 노드를 실행하고 다른 사람의 노드에 접속해서 정보가 정상적으로 조회되는지 테스트해보자.
 
 ```
-cleos -u http://192.168.0.YYYY:8888 get info
+cleos -u http://192.168.0.YYY:8888 get info
 ```
 
 ## 계정 생성
@@ -147,7 +147,7 @@ cleos -u http://192.168.0.YYYY:8888 get info
 지갑 생성을 위해 아래 명령을 실행해보자.
 
 ```
-cleos wallet create --file wallet.txt
+cleos wallet create --file ~/wallet.txt
 ```
 
 정상적으로 지갑이 생성된 경우 아래와 같이 출력된다.
@@ -162,10 +162,10 @@ saving password to wallet.txt
 
 첫 번째 줄을 보면 `"/usr/opt/eosio/2.0.6/bin/keosd" launched` 와 같이 `cleos`가 지갑과 관련하여 필요한 작업을 수행하기 위해 `keosd`를 자동으로 실행한 것을 알 수 있다. 지갑 안에는 EOSIO의 개인키를 저장하게 되는데 개인키를 안전하게 저장하기 위해서 지갑의 암호가 설정된다. 지갑 암호는 자신이 정하는 것이 아니라 지갑을 생성할 때 프로그램이 자동으로 설정해준다. 이 때 지갑 암호는 자신의 하드디스크에 키를 저장할 때 안전하게 저장하기 위해 사용하는 것으로 블록체인과의 통신을 위해서는 전혀 사용되지 않는다.
 
-`--file wallet.txt` 옵션을 설정하면 지갑 비밀번호를 `wallet.txt` 라는 이름의 파일에 저장한다. 다음 명령을 입력해서 지갑의 비밀번호를 확인해보자.
+`--file ~/wallet.txt` 옵션을 설정하면 지갑 비밀번호를 자신의 HOME 디렉토리에 `wallet.txt` 라는 이름의 파일로 저장한다. 다음 명령을 입력해서 지갑의 비밀번호를 확인해보자.
 
 ```
-cat wallet.txt
+cat ~/wallet.txt
 ```
 
 지갑은 기본값으로 900초(15분)동안 사용하지 않으면 잠기게 된다. 잠긴 지갑과 관련한 명령을 실행하려 하면 다음과 같은 에러가 발생한다.
@@ -187,7 +187,7 @@ cleos wallet keys
 잠긴 지갑을 사용하기 위해서는 암호를 이용해서 다시 잠금을 해제(unlock)해야 하는데 실제 지갑을 사용할 때는 지갑 암호를 안전하게 보관해야 하지만 지금처럼 테스트를 위해서 파일에 저장해둔 암호를 이용하면 쉽게 지갑의 잠금을 해제할 수 있다.
 
 ```
-cleos wallet unlock --password $(cat wallet.txt)
+cleos wallet unlock --password $(cat ~/wallet.txt)
 ```
 
 ### 계정 정보 조회
@@ -247,7 +247,7 @@ $ cleos wallet keys
 개인키까지 확인하고 싶다면 아래와 같이 입력한다.
 
 ```
-$ cleos wallet private_keys --password $(cat wallet.txt)
+$ cleos wallet private_keys --password $(cat ~/wallet.txt)
 [[
     "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
     "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"
