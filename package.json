@@ -1,0 +1,19 @@
+{
+  "name": "wallet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bitcore-mnemonic": "^8.20.4",
+    "express": "^4.17.1",
+    "keccak": "^3.0.0",
+    "secp256k1": "^4.0.1",
+    "web3": "^1.2.9"
+  }
+}
