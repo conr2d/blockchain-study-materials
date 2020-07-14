@@ -42,11 +42,11 @@ function privateKeyToAddress(privateKey) {
   return toChecksumAddress(address);
 }
 
-function createMnemonic(wordsCount = 12) {
-  if (wordsCount < 12 || wordsCount > 24 || wordsCount % 3 !== 0) {
+function createMnemonic(numWords = 12) {
+  if (numWords < 12 || numWords > 24 || numWords % 3 !== 0) {
     throw new Error("invalid number of words");
   }
-  const entropy = (16 + (wordsCount - 12) / 3 * 4) * 8;
+  const entropy = (16 + (numWords - 12) / 3 * 4) * 8;
   return new Mnemonic(entropy);
   //return new Mnemonic(crypto.randomBytes(entropy / 8));
 }
