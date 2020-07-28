@@ -3,6 +3,8 @@ import secp256k1 from "secp256k1";
 import createKeccakHash from "keccak";
 import Mnemonic from "bitcore-mnemonic";
 
+// A valid private key for secp256k1 should be in the range between
+// 1 and 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140
 function createPrivateKey() {
     let privateKey;
     do {
@@ -11,6 +13,7 @@ function createPrivateKey() {
     return privateKey;
 }
 
+// Ethereum uses uncompressed public key for address derivation.
 function createPublicKey(privateKey, compressed = false) {
     return Buffer.from(secp256k1.publicKeyCreate(privateKey, compressed));
 }
@@ -20,21 +23,22 @@ function createAddress(publicKey) {
     return "0x" + hash.slice(24);
 }
 
+// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md#implementation
 function toChecksumAddress (address) {
-    address = address.toLowerCase().replace('0x', '')
-    var hash = createKeccakHash('keccak256').update(address).digest('hex')
-    var ret = '0x'
-  
-    for (var i = 0; i < address.length; i++) {
-      if (parseInt(hash[i], 16) >= 8) {
-        ret += address[i].toUpperCase()
-      } else {
-        ret += address[i]
-      }
+  address = address.toLowerCase().replace('0x', '');
+  let hash = createKeccakHash('keccak256').update(address).digest('hex');
+  let ret = '0x';
+
+  for (let i = 0; i < address.length; i++) {
+    if (parseInt(hash[i], 16) >= 8) {
+      ret += address[i].toUpperCase();
+    } else {
+      ret += address[i];
     }
-  
-    return ret
   }
+
+  return ret;
+}
 
 function privateKeyToAddress(privateKey) {
   const publicKey = createPublicKey(privateKey);
@@ -42,15 +46,18 @@ function privateKeyToAddress(privateKey) {
   return toChecksumAddress(address);
 }
 
+// 12 words = 128bit entropy
+// 24 words = 256bit entropy
 function createMnemonic(numWords = 12) {
   if (numWords < 12 || numWords > 24 || numWords % 3 !== 0) {
     throw new Error("invalid number of words");
   }
-  const entropy = (16 + (numWords - 12) / 3 * 4) * 8;
+  const entropy = 128 + ((numWords - 12) / 3 * 4) * 8;
   return new Mnemonic(entropy);
-  //return new Mnemonic(crypto.randomBytes(entropy / 8));
 }
 
+// https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
+// https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 function mnemonicToPrivateKey(mnemonic) {
   const privateKey = mnemonic.toHDPrivateKey().derive("m/44'/60'/0'/0/0").privateKey;
   return Buffer.from(privateKey.toString(), "hex");
