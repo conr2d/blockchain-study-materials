@@ -1,0 +1,65 @@
+.App {
+   text-align: center;
+}
+
+.App-header {
+   background-color: #282c34;
+   min-height: 10vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   font-size: calc(10px + 2vmin);
+   color: white;
+}
+
+.container {
+   position: relative;
+   width: 100%;
+   max-width: 900px;
+   margin: 20px auto;
+   padding: 0 20px;
+   box-sizing: border-box;
+}
+
+.content {
+}
+
+.content p {
+   text-align: left;
+}
+
+p.date {
+   font-size: 0.8em;
+   color: #999;
+   margin-top: 0px;
+}
+
+p.author {
+   font-size: 0.8em;
+   margin-top: 0px;
+   font-weight: bold;
+}
+
+p {
+   margin-top: 0px;
+   margin-bottom: 5px;
+}
+
+
+hr {
+   box-sizing: content-box; /* 1 */
+   height: 0; /* 1 */
+   overflow: visible; /* 2 */
+}
+
+textarea {
+   height: 38px;
+   width: 100%;
+   padding: 6px 10px;
+   background-color: #fff;
+   border: 1px solid #D1D1D1;
+   border-radius: 4px;
+   box-shadow: none;
+   box-sizing: border-box;
+}
