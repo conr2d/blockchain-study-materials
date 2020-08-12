@@ -18,10 +18,14 @@ class PostStorage {
   insertPost(post) {
     if (!post) return;
     let pos = this.posts.findIndex((p) => {
-      return p.id > post.id;
+      return post.id > p.id;
     });
-
-    this.posts.splice(pos + 1, 0, post);
+    
+    if (!this.posts.length) {
+      this.posts.push(post);
+    } else {
+      this.posts.splice(pos, 0, post);
+    }
   }
 
   newPost(component, post) {
