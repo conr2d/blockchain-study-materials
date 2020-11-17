@@ -43,5 +43,6 @@ geth init genesis.json --datadir ./data
 ## Run chain
 
 ```
+cat > password.txt
 geth --datadir ./data --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,web3,net --http.corsdomain "*" --networkid 9999 --mine --password password.txt --allow-insecure-unlock --unlock 0xdf7A7D17BA30d77714a9DF4248743800faFf9D76
 ```
