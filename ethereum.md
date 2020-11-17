@@ -23,7 +23,6 @@ Private key should consist of 64 characters of hex string. (32 bytes)
 ```
 cat > keyfile.txt
 geth account import keyfile.txt --datadir ./data
-rm keyfile.txt
 ```
 
 ## Generate genesis configuration
