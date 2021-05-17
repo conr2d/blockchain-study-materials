@@ -1,4 +1,5 @@
-import EthereumTx from "ethereumjs-tx";
+import Common from "@ethereumjs/common";
+import { Transaction } from "@ethereumjs/tx";
 import request from "request-promise-native";
 import key from "./key.js";
 import ecdsa from "./ecdsa.js";
@@ -18,14 +19,15 @@ const address = key.privateKeyToAddress(privateKey);
         jsonrpc: "2.0",
         method: "eth_getTransactionCount",
         id: 0,
-        params: [address],
+        params: [address, 'latest'],
       },
     });
     nonce = response.result;
   }
 
   const chainId = 3; // ropsten
-  const tx = new EthereumTx.Transaction({
+  const common = new Common.default({ chain: 'ropsten', hardfork: 'berlin' });
+  let txParams = {
     nonce: nonce,
     gasPrice: "0x2540BE400", // 10 Gwei
     gasLimit: "0x5208",
@@ -34,19 +36,20 @@ const address = key.privateKeyToAddress(privateKey);
     // data: "0x" + Buffer.from("Hello Ethereum").toString("hex"),
     // simple ether transfer costs 21000 (0x5208) gas,
     // if you want to send transaction with data, increase gasLimit
-  }, { chain: "ropsten", hardfork: "muirGlacier" });
+  };
+  let tx = Transaction.fromTxData(txParams, { common });
 
-  // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md
-  tx.raw[6] = Buffer.from(chainId.toString(16), "hex");
-
-  const serializedTx = tx.serialize();
-  // console.log(serializedTx.toString("hex"));
+  let serializedTx = tx.serialize();
+  serializedTx[serializedTx.length - 3] = chainId;
   const signature = ecdsa.sign(serializedTx, privateKey);
 
-  tx.r = Buffer.from(signature.signature).slice(0, 32);
-  tx.s = Buffer.from(signature.signature).slice(32);
-  // Use raw[6] instead of v to bypass setter
-  tx.raw[6] = Buffer.from((chainId * 2 + 35 + signature.recid).toString(16), "hex");
+  txParams = {
+    ...txParams,
+    v: Buffer.from((chainId * 2 + 35 + signature.recid).toString(16), "hex"),
+    r: Buffer.from(signature.signature).slice(0, 32),
+    s: Buffer.from(signature.signature).slice(32),
+  };
+  tx = Transaction.fromTxData(txParams, { common });
 
   const signedTx = tx.serialize();
   console.log(signedTx.toString("hex"));
