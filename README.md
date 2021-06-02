@@ -1,6 +1,6 @@
 # EOSIO Private 테스트넷 구축
 
-아래 내용은 우분투 18.04 또는 리눅스용 윈도우 하위 시스템(Windows Subsystem for Linux; WSL) 환경에서 진행하는 것을 가정하고 있다.
+아래 내용은 우분투 20.04 또는 리눅스용 윈도우 하위 시스템(Windows Subsystem for Linux; WSL) 환경에서 진행하는 것을 가정하고 있다.
 
 ## EOSIO 설치
 
