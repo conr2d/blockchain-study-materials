@@ -5,8 +5,8 @@
 ## EOSIO 설치
 
 ```
-wget https://github.com/eosio/eos/releases/download/v2.0.6/eosio_2.0.6-1-ubuntu-18.04_amd64.deb
-sudo apt install ./eosio_2.0.6-1-ubuntu-18.04_amd64.deb
+wget https://github.com/EOSIO/eos/releases/download/v2.1.0/eosio_2.1.0-1-ubuntu-20.04_amd64.deb
+sudo apt install ./eosio_2.1.0-1-ubuntu-20.04_amd64.deb
 ```
 
 ## 싱글 노드 테스트넷 구축
@@ -153,14 +153,14 @@ cleos wallet create --file ~/wallet.txt
 정상적으로 지갑이 생성된 경우 아래와 같이 출력된다.
 
 ```
-"/usr/opt/eosio/2.0.6/bin/keosd" launched
+"/usr/opt/eosio/2.1.0/bin/keosd" launched
 Creating wallet: default
 Save password to use in the future to unlock this wallet.
 Without password imported keys will not be retrievable.
 saving password to wallet.txt
 ```
 
-첫 번째 줄을 보면 `"/usr/opt/eosio/2.0.6/bin/keosd" launched` 와 같이 `cleos`가 지갑과 관련하여 필요한 작업을 수행하기 위해 `keosd`를 자동으로 실행한 것을 알 수 있다. 지갑 안에는 EOSIO의 개인키를 저장하게 되는데 개인키를 안전하게 저장하기 위해서 지갑의 암호가 설정된다. 지갑 암호는 자신이 정하는 것이 아니라 지갑을 생성할 때 프로그램이 자동으로 설정해준다. 이 때 지갑 암호는 자신의 하드디스크에 키를 저장할 때 안전하게 저장하기 위해 사용하는 것으로 블록체인과의 통신을 위해서는 전혀 사용되지 않는다.
+첫 번째 줄을 보면 `"/usr/opt/eosio/2.1.0/bin/keosd" launched` 와 같이 `cleos`가 지갑과 관련하여 필요한 작업을 수행하기 위해 `keosd`를 자동으로 실행한 것을 알 수 있다. 지갑 안에는 EOSIO의 개인키를 저장하게 되는데 개인키를 안전하게 저장하기 위해서 지갑의 암호가 설정된다. 지갑 암호는 자신이 정하는 것이 아니라 지갑을 생성할 때 프로그램이 자동으로 설정해준다. 이 때 지갑 암호는 자신의 하드디스크에 키를 저장할 때 안전하게 저장하기 위해 사용하는 것으로 블록체인과의 통신을 위해서는 전혀 사용되지 않는다.
 
 `--file ~/wallet.txt` 옵션을 설정하면 지갑 비밀번호를 자신의 HOME 디렉토리에 `wallet.txt` 라는 이름의 파일로 저장한다. 다음 명령을 입력해서 지갑의 비밀번호를 확인해보자.
 
@@ -328,8 +328,8 @@ nodeos -p conr2d --signature-provider=EOS5wpEPhgL6dpzjGAMQDGqCzGqxBHz9GyzpSec3jN
 시스템 컨트랙트를 빌드하고 배포하기 위해 컨트랙트 개발 툴킷을 설치한다.
 
 ```
-wget https://github.com/eosio/eosio.cdt/releases/download/v1.7.0/eosio.cdt_1.7.0-1-ubuntu-18.04_amd64.deb
-sudo apt install ./eosio.cdt_1.7.0-1-ubuntu-18.04_amd64.deb
+wget https://github.com/EOSIO/eosio.cdt/releases/download/v1.8.0/eosio.cdt_1.8.0-1-ubuntu-20.04_amd64.deb
+sudo apt install ./eosio.cdt_1.8.0-1-ubuntu-20.04_amd64.deb
 ```
 
 컨트랙트를 다운로드하고 컴파일 한다.
@@ -458,7 +458,7 @@ cleos push action eosio.token retire '["1000000.0000 EOS", ""]' -p eosio
 ## 컨트랙트 예제
 
 ```
-git clone https://github.com/conr2d/eosio-contract-practice -b decenter-eos-core
+git clone https://github.com/conr2d/blockchain-study-materials -b decenter-eos-core
 ```
 
 ## nodejs 설치
@@ -475,10 +475,10 @@ echo -e "\nexport PATH=\"$HOME/.npm-packages/bin:\$PATH\"" >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
 
-## Scatter 설치
+## Greymass Anchor 설치
 
 ```
-https://github.com/GetScatter/ScatterDesktop/releases/download/11.0.1/win-scatter-11.0.1.exe
+https://github.com/greymass/anchor/releases/download/v1.2.3/win-anchor-wallet-1.2.3.exe
 
 [
     "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
